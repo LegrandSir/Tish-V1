@@ -1,16 +1,24 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 export default function MediaPlayer() {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [currentTrack, setCurrentTrack] = useState({ title: "BEST PART - DANIEL CAESAR", src: "/best-part.mpeg" });
+  // Updated to .mp3
+  const [currentTrack, setCurrentTrack] = useState({ title: "BEST PART - DANIEL CAESAR", src: "/best-part.mp3" });
   const audioRef = useRef(null);
+
+  // Automatically play when the track changes if it's supposed to be playing
+  useEffect(() => {
+    if (isPlaying && audioRef.current) {
+      audioRef.current.play().catch(e => console.log("Audio play blocked by browser:", e));
+    }
+  }, [currentTrack]);
 
   const togglePlay = () => {
     if (isPlaying) {
       audioRef.current.pause();
     } else {
-      audioRef.current.play();
+      audioRef.current.play().catch(e => console.log("Audio play blocked by browser:", e));
     }
     setIsPlaying(!isPlaying);
   };
@@ -18,13 +26,12 @@ export default function MediaPlayer() {
   const changeTrack = (title, src) => {
     setCurrentTrack({ title, src });
     setIsPlaying(true);
-    setTimeout(() => audioRef.current.play(), 100);
   };
 
   return (
     <div className="flex flex-col lg:flex-row gap-6 w-full max-w-5xl mx-auto p-2 md:p-4 text-rose-900">
       
-      {/* Hidden Audio Element */}
+      {/* Hidden Audio Element - Now looking for .mp3 */}
       <audio ref={audioRef} src={currentTrack.src} loop />
 
       <motion.div 
@@ -37,7 +44,6 @@ export default function MediaPlayer() {
 
         <h2 className="text-rose-700 text-xs md:text-sm mb-4 leading-loose font-bold">NOW PLAYING: US ❤️</h2>
 
-        {/* Video Container */}
         <div className="w-full aspect-video bg-rose-50 border-4 border-rose-200 rounded-lg relative overflow-hidden mb-4 shadow-inner">
           <video 
             src="/your-promise-video.mp4" 
@@ -47,7 +53,6 @@ export default function MediaPlayer() {
           />
         </div>
 
-        {/* Media Controls */}
         <div className="flex flex-col md:flex-row items-center justify-between mt-6 gap-4">
           <div className="flex gap-4">
             <button className="border-2 border-rose-400 bg-rose-100 text-rose-600 w-10 h-10 flex items-center justify-center text-[10px] hover:bg-rose-200 active:scale-90 transition-transform rounded-full">|&lt;</button>
@@ -69,7 +74,6 @@ export default function MediaPlayer() {
         </div>
       </motion.div>
 
-      {/* Playlist Sidebar */}
       <motion.div 
         initial={{ x: 20, opacity: 0 }} animate={{ x: 0, opacity: 1 }}
         className="w-full lg:w-72 flex flex-col gap-6"
@@ -81,21 +85,21 @@ export default function MediaPlayer() {
 
           <div className="flex flex-col gap-3">
             <button 
-              onClick={() => changeTrack("BEST PART - DANIEL CAESAR", "/best-part.mpeg")}
+              onClick={() => changeTrack("BEST PART - DANIEL CAESAR", "/best-part.mp3")}
               className={`p-3 text-[8px] flex justify-between items-center text-left transition-colors border rounded-lg ${currentTrack.title.includes("BEST PART") ? 'bg-rose-500 border-rose-600 text-white shadow-md' : 'bg-rose-50 border-rose-200 text-rose-700 hover:bg-rose-100'}`}
             >
               <span>{currentTrack.title.includes("BEST PART") && isPlaying ? '▶ ' : ''}BEST PART - DANIEL CAESAR</span>
             </button>
             
             <button 
-              onClick={() => changeTrack("PERFECT - ED SHEERAN", "/Perfect-ed sheeran.mpeg")}
+              onClick={() => changeTrack("PERFECT - ED SHEERAN", "/perfect.mp3")}
               className={`p-3 text-[8px] flex justify-between items-center text-left transition-colors border rounded-lg ${currentTrack.title.includes("PERFECT") ? 'bg-rose-500 border-rose-600 text-white shadow-md' : 'bg-rose-50 border-rose-200 text-rose-700 hover:bg-rose-100'}`}
             >
               <span>{currentTrack.title.includes("PERFECT") && isPlaying ? '▶ ' : ''}PERFECT - ED SHEERAN</span>
             </button>
 
             <button 
-              onClick={() => changeTrack("CHAI YA SAA KUMI - YWAYA TAJIRI", "/chai-ya-saa-kumi.mpeg")}
+              onClick={() => changeTrack("CHAI YA SAA KUMI - YWAYA TAJIRI", "/chai.mp3")}
               className={`p-3 text-[8px] flex justify-between items-center text-left transition-colors border rounded-lg ${currentTrack.title.includes("CHAI") ? 'bg-rose-500 border-rose-600 text-white shadow-md' : 'bg-rose-50 border-rose-200 text-rose-700 hover:bg-rose-100'}`}
             >
               <span>{currentTrack.title.includes("CHAI") && isPlaying ? '▶ ' : ''}CHAI YA SAA KUMI - YWAYA TAJIRI</span>
