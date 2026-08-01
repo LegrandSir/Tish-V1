@@ -80,7 +80,7 @@ export default function MediaPlayer() {
       >
         <div className="border-4 border-rose-300 bg-white/80 p-4 shadow-[4px_4px_0_#f43f5e] rounded-xl">
           <div className="border-b-2 border-rose-200 pb-2 mb-4">
-            <span className="text-[10px] text-rose-500 font-bold">♡ PLAYLIST.LST</span>
+            <span className="text-[10px] text-rose-500 font-bold">♡ Doba moto</span>
           </div>
 
           <div className="flex flex-col gap-3">
