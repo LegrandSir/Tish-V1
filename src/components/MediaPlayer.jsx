@@ -39,10 +39,10 @@ export default function MediaPlayer() {
         className="flex-1 border-4 border-rose-300 bg-white/80 p-4 shadow-[6px_6px_0_#f43f5e] w-full rounded-xl backdrop-blur-sm"
       >
         <div className="flex justify-between items-center mb-4 border-b-2 border-rose-200 pb-2">
-          <span className="text-[10px] md:text-xs text-rose-500 font-bold">♡ OUR_MEMORIES.EXE</span>
+          <span className="text-[10px] md:text-xs text-rose-500 font-bold">♡ Just coz i can, odede wewe</span>
         </div>
 
-        <h2 className="text-rose-700 text-xs md:text-sm mb-4 leading-loose font-bold">NOW PLAYING: US ❤️</h2>
+        <h2 className="text-rose-700 text-xs md:text-sm mb-4 leading-loose font-bold">Doba moto ❤️</h2>
 
         <div className="w-full aspect-video bg-rose-50 border-4 border-rose-200 rounded-lg relative overflow-hidden mb-4 shadow-inner">
           <video 
